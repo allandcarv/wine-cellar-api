@@ -1,8 +1,29 @@
 import * as Yup from 'yup';
 
+import File from '../models/File';
 import Wine from '../models/Wine';
 
 class WineController {
+  async index(req, res) {
+    const { page = 1 } = req.query;
+    const limit = 10;
+
+    const wines = await Wine.findAll({
+      limit,
+      offset: (page - 1) * limit,
+      attributes: ['id', 'name', 'country', 'vineyard', 'year', 'description'],
+      include: [
+        {
+          model: File,
+          as: 'image',
+          attributes: ['path', 'url'],
+        },
+      ],
+    });
+
+    return res.status(200).json(wines);
+  }
+
   async store(req, res) {
     if (!req.admin) {
       return res.status(401).json({ error: 'You are not allowed.' });
