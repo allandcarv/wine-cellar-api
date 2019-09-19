@@ -8,6 +8,7 @@ class Wine extends Model {
         country: Sequelize.STRING,
         vineyard: Sequelize.STRING,
         year: Sequelize.STRING,
+        description: Sequelize.STRING,
       },
       { sequelize }
     );

@@ -23,6 +23,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      description: {
+        type: Sequelize.STRING(500),
+        allowNull: false,
+      },
       image_id: {
         type: Sequelize.INTEGER,
         references: {

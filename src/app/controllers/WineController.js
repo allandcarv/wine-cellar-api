@@ -13,6 +13,9 @@ class WineController {
       country: Yup.string().required(),
       vineyard: Yup.string().required(),
       year: Yup.string().required(),
+      description: Yup.string()
+        .max(500)
+        .required(),
       image_id: Yup.number().required(),
     });
 
