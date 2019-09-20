@@ -19,7 +19,7 @@ class WineController {
       },
       limit,
       offset: (page - 1) * limit,
-      attributes: ['id', 'name', 'country', 'vineyard', 'year', 'description'],
+      attributes: ['id', 'name', 'country', 'vineyard', 'year'],
       include: [
         {
           model: File,
@@ -30,6 +30,21 @@ class WineController {
     });
 
     return res.status(200).json(wines);
+  }
+
+  async show(req, res) {
+    const wine = await Wine.findByPk(req.params.id, {
+      include: [
+        { model: File, as: 'image', attributes: ['id', 'path', 'url'] },
+      ],
+      attributes: ['id', 'name', 'country', 'vineyard', 'year', 'description'],
+    });
+
+    if (!wine) {
+      return res.status(404).json({ error: 'Wine not found.' });
+    }
+
+    return res.status(200).json(wine);
   }
 
   async store(req, res) {

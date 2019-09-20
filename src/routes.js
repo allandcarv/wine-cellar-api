@@ -15,6 +15,7 @@ const upload = multer(multerConfig);
 routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
 routes.get('/wines', WineController.index);
+routes.get('/wines/:id', WineController.show);
 
 routes.use(authMiddleware);
 
