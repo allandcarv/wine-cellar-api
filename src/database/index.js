@@ -2,11 +2,12 @@ import Sequelize from 'sequelize';
 
 import databaseConfig from '../config/database';
 
+import Comment from '../app/models/Comment';
 import File from '../app/models/File';
 import User from '../app/models/User';
 import Wine from '../app/models/Wine';
 
-const models = [File, User, Wine];
+const models = [Comment, File, User, Wine];
 
 class Database {
   constructor() {

@@ -1,7 +1,9 @@
 import * as Yup from 'yup';
 import { Op } from 'sequelize';
 
+import Comment from '../models/Comment';
 import File from '../models/File';
+import User from '../models/User';
 import Wine from '../models/Wine';
 
 class WineController {
@@ -36,6 +38,12 @@ class WineController {
     const wine = await Wine.findByPk(req.params.id, {
       include: [
         { model: File, as: 'image', attributes: ['id', 'path', 'url'] },
+        {
+          model: Comment,
+          as: 'comments',
+          attributes: ['id', 'comment'],
+          include: [{ model: User, attributes: ['name'] }],
+        },
       ],
       attributes: ['id', 'name', 'country', 'vineyard', 'year', 'description'],
     });

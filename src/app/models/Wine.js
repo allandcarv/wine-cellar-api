@@ -17,6 +17,7 @@ class Wine extends Model {
   }
 
   static associate(models) {
+    this.hasMany(models.Comment, { foreignKey: 'wine_id', as: 'comments' });
     this.belongsTo(models.File, { foreignKey: 'image_id', as: 'image' });
   }
 }
