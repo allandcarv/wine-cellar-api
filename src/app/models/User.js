@@ -23,7 +23,7 @@ class User extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Comment, { foreignKey: 'user_id' });
+    this.hasMany(models.Comment, { foreignKey: 'user_id', as: 'user' });
   }
 
   checkPassword(password) {

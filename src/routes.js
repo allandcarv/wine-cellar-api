@@ -4,6 +4,7 @@ import multer from 'multer';
 import multerConfig from './config/multer';
 
 import authMiddleware from './app/middlewares/auth';
+import CommentController from './app/controllers/CommentController';
 import FileController from './app/controllers/FileController';
 import SessionController from './app/controllers/SessionController';
 import UserController from './app/controllers/UserController';
@@ -21,5 +22,6 @@ routes.use(authMiddleware);
 
 routes.post('/files', upload.single('file'), FileController.store);
 routes.post('/wines', WineController.store);
+routes.post('/wines/:id/comment', CommentController.store);
 
 export default routes;

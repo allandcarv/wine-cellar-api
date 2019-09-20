@@ -42,7 +42,7 @@ class WineController {
           model: Comment,
           as: 'comments',
           attributes: ['id', 'comment'],
-          include: [{ model: User, attributes: ['name'] }],
+          include: [{ model: User, as: 'user', attributes: ['name'] }],
         },
       ],
       attributes: ['id', 'name', 'country', 'vineyard', 'year', 'description'],
