@@ -8,17 +8,10 @@ import Wine from '../models/Wine';
 
 class WineController {
   async index(req, res) {
-    const { page = 1, country, vineyard, year } = req.query;
+    const { page = 1, sort = 'name', order = 'ASC' } = req.query;
     const limit = 10;
 
     const wines = await Wine.findAll({
-      where: {
-        [Op.and]: [
-          country ? { country } : null,
-          vineyard ? { vineyard } : null,
-          year ? { year } : null,
-        ],
-      },
       limit,
       offset: (page - 1) * limit,
       attributes: ['id', 'name', 'country', 'vineyard', 'year'],
@@ -29,6 +22,7 @@ class WineController {
           attributes: ['path', 'url'],
         },
       ],
+      order: [[sort, order]],
     });
 
     return res.status(200).json(wines);
