@@ -22,6 +22,6 @@ routes.use(authMiddleware);
 
 routes.post('/files', upload.single('file'), FileController.store);
 routes.post('/wines', WineController.store);
-routes.post('/wines/:id/comment', CommentController.store);
+routes.post('/wines/comment', CommentController.store);
 
 export default routes;
